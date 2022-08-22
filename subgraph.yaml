@@ -1,0 +1,28 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: MonokeeERC721
+    network: goerli
+    source:
+      address: "0x7e798Dcb871C34AD6356C78b3A130264296d67b6"
+      abi: MonokeeERC721
+      startBlock: 7426360
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Token
+        - TokenContract
+        - Owner
+        - OwnerPerTokenContract
+        - All
+      abis:
+        - name: MonokeeERC721
+          file: ./abis/MonokeeERC721.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/monokee-erc-721.ts
