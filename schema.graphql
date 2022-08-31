@@ -9,8 +9,8 @@ type Token @entity {
 
 type TokenContract @entity {
   id: ID!
-  name: String,
-  symbol: String,
+  name: String
+  symbol: String
   supportsEIP721Metadata: Boolean!
   tokens: [Token!]! @derivedFrom(field: "contract")
   numTokens: BigInt!
@@ -21,4 +21,22 @@ type Owner @entity {
   id: ID!
   tokens: [Token!]! @derivedFrom(field: "owner")
   numTokens: BigInt!
+}
+
+type Verifier @entity {
+  id: ID!
+  name: String
+  did: String
+  url: String
+  signer: String
+  address: String
+}
+
+type TrustedSmartContract @entity {
+  id: ID!
+  name: String
+  trusted: Boolean
+  lastChangeTime: BigInt
+  address: String
+  owner: String
 }
